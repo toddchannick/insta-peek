@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	<script src="angular/angular.min.js"></script>
+	<script src="angular/angular.min.js.map"></script>
+	<script src="angular/angular-animate.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="app.js" type="text/javascript"></script>
+	<base target="_blank">
+	<title>instaPeek</title>
+</head>
+
+<body ng-controller="myController">
+
+	<div id="container">
+		<div id="top">
+			<div id="search-area">
+				<img src="images/insta-logo.png">
+				<br><br>
+				<form role="form" class="mainForm" ng-submit="submit()">
+		            <br>
+		            <input type="text" name="instaInput" ng-model="data.tag" placeholder="Enter a tag ..." autofocus required>
+		          <button type="submit" class="button sweep">Submit</button>
+		          <span ng-if="submitted"><button class="button sweep" ng-click="reset()">Clear</button></span>
+		        </form>
+			</div>
+		</div>
+
+		<div id="bottom">
+			<span id="message">{{message}}</span>
+			<br><br><br>
+			<span class="images" ng-if="submitted" ng-repeat="image in images">
+          		<a href="{{image.link}}" ng-mouseenter="overlay=true; caption=true" ng-mouseleave="overlay=false; caption=false">
+          			<div class="pic">
+	          			<img ng-class="{'overlay': overlay}" ng-src="{{image.images.low_resolution.url}}">
+	          			<span class="caption" ng-show="caption">{{image.caption.text | limitTo: 200}}{{image.caption.text.length < 200 ? '' : '...'}}</span>
+	          		</div>
+     			</a>
+        	</span>
+
+		</div>
+		<footer>
+			<span id="footer">Created by Todd Channick for Thinkful.</span>
+		</footer>
+	</div>
+
+</body>
+
+
+</html>
